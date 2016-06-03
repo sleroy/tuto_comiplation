@@ -28,6 +28,7 @@ public class RefactorTest extends AbstractRefactoringTest {
 		final String inputJavaFilePath = "src/test/resources/java_input/Sample2.java";
 		final String exptectedJavaFilePath = "src/test/resources/java_input/CamelCaseRefactoring/Sample2.java.expected";
 
+		setOutputFilePath("src/test/resources/java_input/CamelCaseRefactoring/Sample2.java.output");
 		performFileTest(CamelCaseMethodName.class, inputJavaFilePath, exptectedJavaFilePath);
 	}
 
