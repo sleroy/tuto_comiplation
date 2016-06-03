@@ -78,33 +78,15 @@ dependencies {
 	compile "org.apache.commons:commons-lang3:$APACHE_COMMONLANG3"
 	compile "commons-io:commons-io:$APACHE_COMMONIO"
 
-	compile "com.google.code.findbugs:jsr305:$FINDBUGS"
 	compile "com.google.guava:guava:$GUAVA"
 
-
 	testCompile LOGGING
-
 	testCompile tests_frameworks // TEST FRAMEWORKS
 
-	testCompile("org.easymock:easymock:${TEST_EASYMOCK}") { exclude group: 'org.objenesis' }
 	testRuntime "org.apache.logging.log4j:log4j-core:${LOG4J}"
 
-	testCompile("org.spockframework:spock-core:$TEST_SPOCK") { exclude group: 'junit' }
-	testCompile("org.spockframework:spock-spring:$TEST_SPOCK") { exclude group: 'junit' }
-	testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
-
-	testCompile "org.springframework.security:spring-security-test:$SPRING_SECU"
-
-	testCompile "com.jayway.jsonpath:json-path:$TEST_JAYWAY_JSONPATH"
-	testCompile "com.jayway.jsonpath:json-path-assert:$TEST_JAYWAY_JSONPATH"
-
-
-	file(project.relativePath('eclipse')).listFiles().each({ itfile ->
-		compile files(project.relativePath(itfile))
-		println "Add jar dependency : $itfile"
-
-	})
-
+	// http://mvnrepository.com/artifact/org.eclipse.jdt/org.eclipse.jdt.core
+	compile group: 'org.eclipse.jdt', name: 'org.eclipse.jdt.core', version: '3.10.0'
 }
 
 task unitTest(type : Test) { exclude "**/**IT" }
