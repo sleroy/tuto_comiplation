@@ -9,7 +9,6 @@ JUNIT,
 "org.hamcrest:hamcrest-core:${TEST_HAMCREST}",
 "org.objenesis:objenesis:${TEST_OBJENESIS}"
 ]
-ext.GroovyLibrary = "org.codehaus.groovy:groovy-all:${GROOVY_VERSION}"
 
 logger.info "\n\n\nFramework Version $version\n"
 
@@ -28,6 +27,15 @@ repositories {
 
 }
 
+sourceSets {
+    test {
+        resources {
+            srcDir 'src/test/resources'
+            exclude '**/java_input/**'
+            exclude '**/java_output/**'
+       }
+   }
+}
 
 /** JAVA COMPILATION */
 compileJava {
@@ -98,7 +106,6 @@ dependencies {
 	})
 
 }
-
 
 task unitTest(type : Test) { exclude "**/**IT" }
 
