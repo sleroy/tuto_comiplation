@@ -15,33 +15,18 @@ import fr.echoeslabs.tuto.jdt.refactoring.api.RefactoringException;
 
 public class MethodNameCamelCaseRefactoring extends AbstractRefactoring {
 
-	@Override
-	public final void refactor(final CompilationUnit inputAST) throws RefactoringException {
-		//do not change AST
-		final MethodCollector methodCollector = new MethodCollector();
-		inputAST.accept(methodCollector);
-
-		final List<MethodDeclaration> methodDeclarations = methodCollector.getMethodDeclarations();
-		for (final MethodDeclaration method : methodDeclarations) {
-			final SimpleName name = method.getName();
-			final String currentIdentifier = name.getIdentifier();
-			final String newIdentifier = formatMethodName(currentIdentifier);
-			name.setIdentifier(newIdentifier);
-		}
-
-	}
-
 	private final static class MethodCollector extends ASTVisitor {
+
 		private final List<MethodDeclaration> methodDeclarations = new ArrayList<MethodDeclaration>();
+
+		public final List<MethodDeclaration> getMethodDeclarations() {
+			return this.methodDeclarations;
+		}
 
 		@Override
 		public final boolean visit(final MethodDeclaration node) {
-			getMethodDeclarations().add(node);
+			this.getMethodDeclarations().add(node);
 			return super.visit(node);
-		}
-
-		public final List<MethodDeclaration> getMethodDeclarations() {
-			return methodDeclarations;
 		}
 	}
 
@@ -72,5 +57,21 @@ public class MethodNameCamelCaseRefactoring extends AbstractRefactoring {
 			res = res.substring(0, 250);
 		}
 		return res;
+	}
+
+	@Override
+	public final void refactor(final CompilationUnit inputAST) throws RefactoringException {
+		// do not change AST
+		final MethodCollector methodCollector = new MethodCollector();
+		inputAST.accept(methodCollector);
+
+		final List<MethodDeclaration> methodDeclarations = methodCollector.getMethodDeclarations();
+		for (final MethodDeclaration method : methodDeclarations) {
+			final SimpleName name = method.getName();
+			final String currentIdentifier = name.getIdentifier();
+			final String newIdentifier = formatMethodName(currentIdentifier);
+			name.setIdentifier(newIdentifier);
+		}
+
 	}
 }

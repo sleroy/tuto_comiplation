@@ -9,7 +9,7 @@ public class NoChangeRefactoring extends AbstractRefactoring {
 
 	@Override
 	public final void refactor(final CompilationUnit inputAST) throws RefactoringException {
-		//do not change AST
+		// do not change AST
 	}
 
 }

@@ -16,10 +16,6 @@ public abstract class AbstractRefactoringTest {
 
 	private String outputFilePath = null;
 
-	public void setOutputFilePath(final String _filePath) {
-		this.outputFilePath = _filePath;
-	}
-
 	public void performFileTest(final Class<? extends AbstractRefactoring> refactoringClass, final String _inputJavaFilePath,
 			final String _expectedOutputFilePath) throws RefactoringException {
 
@@ -32,7 +28,7 @@ public abstract class AbstractRefactoringTest {
 		} catch (final IOException e) {
 			throw new RefactoringException("Could not read expected output java content file", e);
 		}
-		performTest(refactoringClass, _inputJavaFile, expectedJavaContent);
+		this.performTest(refactoringClass, _inputJavaFile, expectedJavaContent);
 	}
 
 	public void performTest(final Class<? extends AbstractRefactoring> refactoringClass, final File _inputJavaFile, final String _expectedOutputContent)
@@ -40,10 +36,10 @@ public abstract class AbstractRefactoringTest {
 		final String inputJavaContent;
 		try {
 			inputJavaContent = FileUtils.readFileToString(_inputJavaFile);
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			throw new RefactoringException("Could not read input file", e);
 		}
-		performTest(refactoringClass, inputJavaContent, _expectedOutputContent);
+		this.performTest(refactoringClass, inputJavaContent, _expectedOutputContent);
 	}
 
 	public void performTest(final Class<? extends AbstractRefactoring> refactoringClass, final String _inputJavaContent, final String _expectedOutputContent)
@@ -60,12 +56,16 @@ public abstract class AbstractRefactoringTest {
 				final File outputFile = new File(this.outputFilePath);
 				FileUtils.writeStringToFile(outputFile, finalCode);
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new RefactoringException("Could not apply refactoring", e);
 		} finally {
 			this.outputFilePath = null;
 		}
 		Assert.assertEquals(_expectedOutputContent, finalCode);
+	}
+
+	public void setOutputFilePath(final String _filePath) {
+		this.outputFilePath = _filePath;
 	}
 
 }
