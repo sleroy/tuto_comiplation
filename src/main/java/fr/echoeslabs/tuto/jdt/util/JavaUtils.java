@@ -33,30 +33,6 @@ public class JavaUtils {
 	private static final Logger LOGGER = LoggerFactory.getLogger(JavaUtils.class);
 
 	/**
-	 * Format code.
-	 *
-	 * @param code
-	 *            the code
-	 * @return the string
-	 */
-	public synchronized static final String formatCode(final String code) {
-		final CodeFormatter codeFormatter = ToolFactory.createCodeFormatter(null);
-		// mute System.err
-		final PrintStream err = muteSyserr();
-		final TextEdit textEdit = codeFormatter.format(CodeFormatter.K_COMPILATION_UNIT | CodeFormatter.F_INCLUDE_COMMENTS, code, 0, code.length(), 0, null);
-		// unmute System.err
-		unmuteSyserr(err);
-		final IDocument doc = new Document(code);
-		try {
-			textEdit.apply(doc);
-		} catch (final Exception e) {
-			LOGGER.error(e.getMessage(), e);
-			return code;
-		}
-		return doc.get();
-	}
-
-	/**
 	 * Mute syserr.
 	 *
 	 * @return the prints the stream

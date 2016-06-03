@@ -20,8 +20,8 @@ public abstract class AbstractRefactoringTest {
 		this.outputFilePath = _filePath;
 	}
 
-	public void performFileTest(final Class<? extends AbstractRefactoring> refactoringClass, final String _inputJavaFilePath, final String _expectedOutputFilePath)
-			throws RefactoringException {
+	public void performFileTest(final Class<? extends AbstractRefactoring> refactoringClass, final String _inputJavaFilePath,
+			final String _expectedOutputFilePath) throws RefactoringException {
 
 		final File _expectedOutputFile = new File(_expectedOutputFilePath);
 		final File _inputJavaFile = new File(_inputJavaFilePath);
@@ -48,23 +48,24 @@ public abstract class AbstractRefactoringTest {
 
 	public void performTest(final Class<? extends AbstractRefactoring> refactoringClass, final String _inputJavaContent, final String _expectedOutputContent)
 			throws RefactoringException {
-		final String formatCode;
+		final String finalCode;
 		try {
 			final Method method = refactoringClass.getMethod("refactor", CompilationUnit.class);
 			final CompilationUnit ast = JavaUtils.parse(_inputJavaContent);
+			Assert.assertNotNull(ast);
 			final AbstractRefactoring newInstance = refactoringClass.newInstance();
 			method.invoke(newInstance, ast);
-			formatCode = JavaUtils.formatCode(ast.toString());
+			finalCode = ast.toString();
 			if (this.outputFilePath != null) {
 				final File outputFile = new File(this.outputFilePath);
-				FileUtils.writeStringToFile(outputFile, formatCode);
+				FileUtils.writeStringToFile(outputFile, finalCode);
 			}
 		} catch (Exception e) {
 			throw new RefactoringException("Could not apply refactoring", e);
 		} finally {
 			this.outputFilePath = null;
 		}
-		Assert.assertEquals(_expectedOutputContent, formatCode);
+		Assert.assertEquals(_expectedOutputContent, finalCode);
 	}
 
 }

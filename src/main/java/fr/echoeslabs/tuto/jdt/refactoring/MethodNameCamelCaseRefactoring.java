@@ -13,7 +13,7 @@ import com.google.common.base.CaseFormat;
 import fr.echoeslabs.tuto.jdt.refactoring.api.AbstractRefactoring;
 import fr.echoeslabs.tuto.jdt.refactoring.api.RefactoringException;
 
-public class CamelCaseMethodName extends AbstractRefactoring {
+public class MethodNameCamelCaseRefactoring extends AbstractRefactoring {
 
 	@Override
 	public final void refactor(final CompilationUnit inputAST) throws RefactoringException {

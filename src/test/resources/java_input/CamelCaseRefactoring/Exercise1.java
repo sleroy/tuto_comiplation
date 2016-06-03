@@ -1,5 +1,5 @@
 
-public class Sample3 {
+public class Exercise1 {
 
 
 	// CamelCaseMethodName refactoring will rename this method

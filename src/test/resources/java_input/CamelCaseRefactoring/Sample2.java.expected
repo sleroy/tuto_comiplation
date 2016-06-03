@@ -1,14 +1,11 @@
 public class Sample1 {
-	public void notCamelCaseMethod1() {
-	}
-
-	public void notcamelCaseMethod2() {
-	}
-
-	public void alreadyCamelCaseMethod() {
-	}
-
-	public int _4times8() {
-		return 4 * 8;
-	}
+  public void notCamelCaseMethod1(){
+  }
+  public void notcamelCaseMethod2(){
+  }
+  public void alreadyCamelCaseMethod(){
+  }
+  public int _4times8(){
+    return 4 * 8;
+  }
 }
