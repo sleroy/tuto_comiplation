@@ -3,7 +3,8 @@ Tutorial Refactoring &amp; Audit
 
 ## Exercise 1
 
-Implement MethodInvocationRefactoring.refactor.
+Implement MethodInvocationCamelCaseRefactoring.refactor.
 
 ## Exercise 2
 
+Implement SwitchOrderingRefactoring.refactor.
