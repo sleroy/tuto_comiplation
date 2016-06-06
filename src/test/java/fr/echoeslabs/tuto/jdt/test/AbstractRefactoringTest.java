@@ -15,16 +15,21 @@ import fr.echoeslabs.tuto.jdt.util.JavaUtils;
 public abstract class AbstractRefactoringTest {
 
 	private String outputFilePath = null;
+	private String expectedFilePath = null;
 
-	public void performFileTest(final Class<? extends AbstractRefactoring> refactoringClass, final String _inputJavaFilePath,
-			final String _expectedOutputFilePath) throws RefactoringException {
+	public void performFileTest(final Class<? extends AbstractRefactoring> refactoringClass, final String _inputJavaFilePath) throws RefactoringException {
 
-		final File _expectedOutputFile = new File(_expectedOutputFilePath);
+
 		final File _inputJavaFile = new File(_inputJavaFilePath);
 
 		final String expectedJavaContent;
 		try {
-			expectedJavaContent = FileUtils.readFileToString(_expectedOutputFile);
+			if (this.expectedFilePath != null) {
+				final File _expectedOutputFile = new File(this.expectedFilePath);
+				expectedJavaContent = FileUtils.readFileToString(_expectedOutputFile);
+			} else {
+				expectedJavaContent = null;
+			}
 		} catch (final IOException e) {
 			throw new RefactoringException("Could not read expected output java content file", e);
 		}
@@ -60,12 +65,19 @@ public abstract class AbstractRefactoringTest {
 			throw new RefactoringException("Could not apply refactoring", e);
 		} finally {
 			this.outputFilePath = null;
+			this.expectedFilePath = null;
 		}
-		Assert.assertEquals(_expectedOutputContent, finalCode);
+		if (_expectedOutputContent != null) {
+			Assert.assertEquals(_expectedOutputContent, finalCode);
+		}
 	}
 
 	public void setOutputFilePath(final String _filePath) {
 		this.outputFilePath = _filePath;
+	}
+
+	public void setExpectedFilePath(final String _filePath) {
+		this.expectedFilePath = _filePath;
 	}
 
 }
