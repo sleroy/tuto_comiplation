@@ -1,4 +1,4 @@
-public class Sample1 {
+public class Sample2 {
   public void notCamelCaseMethod1(){
   }
   public void notcamelCaseMethod2(){

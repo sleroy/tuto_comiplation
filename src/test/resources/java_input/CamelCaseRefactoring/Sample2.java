@@ -1,5 +1,5 @@
 
-public class Sample1 {
+public class Sample2 {
 
 	public void not_camel_case_method_1() {
 
