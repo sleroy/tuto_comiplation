@@ -33,6 +33,10 @@ public class Exercise2 {
 		switch (key) {
 		case VAL3:
 			System.out.println("MAX ACHIEVED");
+			for(;;) {
+				if (true)
+					break;
+			}
 			break;
 		case VAL1:
 		case VAL2:
