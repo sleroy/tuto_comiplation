@@ -19,11 +19,12 @@ public class Exercise1 {
 	}
 
 	public static void main(String[] args) {
+		// the method invocation refactoring should rename those 3 occurences
 		not_camel_case_method_similar_to_local_();
 		not_camel_case_method_similar_to_local1();
 		alreadyCamelCaseMethod1();
 
-		// the method invocation refactoring should rename those 2 occurences
+		// the method invocation refactoring should rename those 3 occurences
 		this.not_camel_case_method_similar_to_local_();
 		this.not_camel_case_method_similar_to_local1();
 		this.alreadyCamelCaseMethod();
