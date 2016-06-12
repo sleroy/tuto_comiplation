@@ -1,0 +1,13 @@
+public class Exercise1 {
+  public void notCamelCaseMethodSimilarToLocal(){
+  }
+  public void alreadyCamelCaseMethod(){
+  }
+  public static void main(  String[] args){
+    ExternalObject eo=new ExternalObject();
+    eo.not_camel_case_method();
+    eo.not_camel_case_method_similar_to_local();
+    this.notCamelCaseMethodSimilarToLocal();
+    this.alreadyCamelCaseMethod();
+  }
+}
